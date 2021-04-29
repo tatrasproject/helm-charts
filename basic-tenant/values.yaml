@@ -2,6 +2,16 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+
+tenantName: 
+
+networkPolicies:
+  # Enable the default network policies.
+  enabled: true
+  # Provide additional network policies. Evaluated as a template.
+  extraNetworkPolicies: false
+
+
 replicaCount: 1
 
 image:
