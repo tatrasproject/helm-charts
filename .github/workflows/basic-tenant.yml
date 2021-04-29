@@ -41,7 +41,7 @@ jobs:
 
       - name: Run chart-testing (lint)
         working-directory: basic-tenant
-        run: ct lint
+        run: ls && ct lint
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.0.0
