@@ -11,6 +11,19 @@ networkPolicies:
   # Provide additional network policies. Evaluated as a template.
   extraNetworkPolicies: false
 
+resourceQuotas:
+  # Enable the resource quotas
+  enabled: false
+  
+  # Limit the number of services, pods, pvcs
+  numberOfPods:
+  numberOfPVC: 
+  numberOfNodePorts:
+  numberOfLoadBalancers:
+  numberOfServices: # should be less than the sum of LBs and NodePorts
+  
+  # TODO add request/limit quotas
+  
 
 replicaCount: 1
 
