@@ -40,10 +40,10 @@ jobs:
         uses: helm/chart-testing-action@v2.0.1
 
       - name: Run chart-testing (lint)
-        run: ct --config=basic-tenant-ct-config.yaml lint
+        run: ct --config=ci/basic-tenant-ct-config.yaml lint
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.0.0
 
       - name: Run chart-testing (install)
-        run: ct --config=basic-tenant-ct-config.yaml install
+        run: ct --config=ci/basic-tenant-ct-config.yaml install
