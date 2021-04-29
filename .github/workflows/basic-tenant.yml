@@ -4,11 +4,6 @@ name: Basic-tenant
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-    paths:
-      - 'basic-tenant/**'
   pull_request:
     branches: [ main ]
     paths:
@@ -40,10 +35,10 @@ jobs:
         uses: helm/chart-testing-action@v2.0.1
 
       - name: Run chart-testing (lint)
-        run: ct --config=ci/basic-tenant-ct-config.yaml lint
+        run: ct --config=ci/basic-tenant-ct-config.yaml --target-branch=$GITHUB_HEAD_REF lint
 
       - name: Create kind cluster
         uses: helm/kind-action@v1.0.0
 
       - name: Run chart-testing (install)
-        run: ct --config=ci/basic-tenant-ct-config.yaml install
+        run: ct --config=ci/basic-tenant-ct-config.yaml --target-branch=$GITHUB_HEAD_REF install
