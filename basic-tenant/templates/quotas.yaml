@@ -1,0 +1,70 @@
+{{- if .Values.resourceQuotas.enabled }}
+apiVersion: v1
+kind: List
+items:
+{{- if .Values.resourceQuotas.numberOfPods }}
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: limit-number-of-pods
+    namespace: {{ .Values.tenantName . }}
+    labels:
+        {{- include "basic-tenant.labels" . | nindent 4 }}
+        tenant: {{ .Values.tenantName . }}
+  spec:
+    hard:
+      pods: {{ .Values.resourceQuotas.numberOfPods . }}
+{{- end }}
+{{- if .Values.resourceQuotas.numberOfNodePorts }}
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: limit-number-of-nodeport-services
+    namespace: {{ .Values.tenantName . }}
+    labels:
+        {{- include "basic-tenant.labels" . | nindent 4 }}
+        tenant: {{ .Values.tenantName . }}
+  spec:
+    hard:
+      services.nodeports: {{ .Values.resourceQuotas.numberOfNodePorts . }}
+{{- end }}
+{{- if .Values.resourceQuotas.numberOfLoadBalancers }}
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: limit-number-of-loadbalancer-services
+    namespace: {{ .Values.tenantName . }}
+    labels:
+        {{- include "basic-tenant.labels" . | nindent 4 }}
+        tenant: {{ .Values.tenantName . }}
+  spec:
+    hard:
+      services.loadbalancers: {{ .Values.resourceQuotas.numberOfLoadBalancers . }}
+{{- end }}
+{{- if .Values.resourceQuotas.numberOfPVC }}
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: limit-number-of-pvc
+    namespace: {{ .Values.tenantName . }}
+    labels:
+        {{- include "basic-tenant.labels" . | nindent 4 }}
+        tenant: {{ .Values.tenantName . }}
+  spec:
+    hard:
+      persistentvolumeclaims: {{ .Values.resourceQuotas.numberOfPVC . }}
+{{- end }}
+{{- if .Values.resourceQuotas.numberOfServices }}
+- apiVersion: v1
+  kind: ResourceQuota
+  metadata:
+    name: limit-number-of-services
+    namespace: {{ .Values.tenantName . }}
+    labels:
+        {{- include "basic-tenant.labels" . | nindent 4 }}
+        tenant: {{ .Values.tenantName . }}
+  spec:
+    hard:
+      services: {{ .Values.resourceQuotas.numberOfServices . }}
+{{- end }}
+{{- end }}
